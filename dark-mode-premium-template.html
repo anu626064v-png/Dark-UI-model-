@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dark Mode Premium — UI Starter Template</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            void: "#0A0A0A",
+            coal: "#111111",
+            slate: "#1A1A1A",
+            ash: "#242424",
+            line: "#2A2A2A",
+            mist: "#A8A8A8",
+            snow: "#F4F1EA",
+            gold: {
+              200: "#E8D5A3",
+              300: "#DCC07A",
+              400: "#C9A44A",
+              500: "#B8922F",
+            },
+          },
+          fontFamily: {
+            display: ["Playfair Display", "Georgia", "serif"],
+            sans: ["Inter", "system-ui", "ui-sans-serif", "sans-serif"],
+          },
+          letterSpacing: {
+            label: "0.16em",
+          },
+          boxShadow: {
+            glow: "0 0 0 1px rgba(201,164,74,0.18), 0 0 28px rgba(201,164,74,0.12)",
+            "glow-strong": "0 0 0 1px rgba(201,164,74,0.35), 0 0 36px rgba(201,164,74,0.22)",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #0A0A0A; color: #F4F1EA; }
+
+    .slot-label {
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 0.625rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #6B6B6B;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .ph-box {
+      background: #161616;
+      color: #6B6B6B;
+      border: 1px solid #2A2A2A;
+    }
+
+    /* Sticky nav: transparent at top, blurred charcoal after scroll */
+    #site-header {
+      background: transparent;
+      border-color: transparent;
+      transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    #site-header.is-scrolled {
+      background: rgba(10, 10, 10, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-color: #2A2A2A;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .card-glow {
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .card-glow:hover {
+      border-color: rgba(201, 164, 74, 0.45);
+      box-shadow: 0 0 0 1px rgba(201, 164, 74, 0.18), 0 0 32px rgba(201, 164, 74, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      box-shadow: 0 0 0 1px rgba(201, 164, 74, 0.25), 0 0 24px rgba(201, 164, 74, 0.12);
+      transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 0 1px rgba(201, 164, 74, 0.5), 0 0 32px rgba(201, 164, 74, 0.28);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(201, 164, 74, 0.45);
+      box-shadow: 0 0 20px rgba(201, 164, 74, 0.1);
+    }
+
+    .hero-wash {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201, 164, 74, 0.14), transparent 55%),
+        radial-gradient(ellipse 40% 30% at 80% 20%, rgba(201, 164, 74, 0.05), transparent 50%),
+        #0A0A0A;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased bg-void text-snow">
+
+  <!-- =====================================================================
+       HEADER / NAV
+       Gains blur + charcoal wash after the page scrolls.
+       ===================================================================== -->
+  <header id="site-header" class="sticky top-0 z-50 border-b">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-8">
+      <div>
+        <p class="slot-label mb-1">Logo / Brand</p>
+        <a href="#hero" class="font-display text-lg font-semibold tracking-tight text-snow">[Business Name]</a>
+      </div>
+
+      <nav class="hidden items-center gap-8 md:flex" aria-label="Primary">
+        <div class="text-center">
+          <p class="slot-label mb-1">Nav Link</p>
+          <a href="#about" class="text-sm text-mist hover:text-snow">[Link]</a>
+        </div>
+        <div class="text-center">
+          <p class="slot-label mb-1">Nav Link</p>
+          <a href="#features" class="text-sm text-mist hover:text-snow">[Link]</a>
+        </div>
+        <div class="text-center">
+          <p class="slot-label mb-1">Nav Link</p>
+          <a href="#gallery" class="text-sm text-mist hover:text-snow">[Link]</a>
+        </div>
+      </nav>
+
+      <div class="hidden sm:block">
+        <p class="slot-label mb-1 text-right">Header CTA</p>
+        <a href="#cta" class="btn-primary inline-flex items-center rounded-full bg-gold-400 px-4 py-2 text-sm font-medium text-void hover:bg-gold-300">
+          [Primary Action]
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- =====================================================================
+         1. HERO
+         Large display heading, tagline, two CTAs. Soft gold wash behind.
+         ===================================================================== -->
+    <section id="hero" class="hero-wash reveal">
+      <div class="mx-auto max-w-6xl px-6 py-28 sm:px-8 sm:py-36 lg:py-44">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="slot-label mb-5">Hero Eyebrow</p>
+          <p class="mb-7 text-xs font-medium uppercase tracking-label text-gold-400">[Small eyebrow text]</p>
+
+          <p class="slot-label mb-3">Hero Heading</p>
+          <h1 class="font-display text-5xl font-semibold leading-[1.08] tracking-tight text-snow sm:text-6xl lg:text-7xl">
+            [Business Name]
+          </h1>
+
+          <p class="slot-label mb-3 mt-8">Hero Tagline</p>
+          <p class="mx-auto max-w-xl text-lg leading-relaxed text-mist sm:text-xl">
+            [Short tagline that describes what the business offers in one clear sentence.]
+          </p>
+
+          <div class="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <div>
+              <p class="slot-label mb-2 text-center">Primary CTA Button</p>
+              <a href="#cta" class="btn-primary inline-flex min-w-[12rem] items-center justify-center rounded-full bg-gold-400 px-7 py-3.5 text-sm font-semibold text-void hover:bg-gold-300">
+                [Primary Action]
+              </a>
+            </div>
+            <div>
+              <p class="slot-label mb-2 text-center">Secondary CTA Button</p>
+              <a href="#about" class="btn-ghost inline-flex min-w-[12rem] items-center justify-center rounded-full border border-line bg-transparent px-7 py-3.5 text-sm font-medium text-snow hover:bg-ash">
+                [Secondary Action]
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         2. ABOUT / INTRO
+         One idea, high contrast type, room to breathe.
+         ===================================================================== -->
+    <section id="about" class="reveal border-t border-line">
+      <div class="mx-auto max-w-6xl px-6 py-24 sm:px-8 sm:py-32">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="slot-label mb-4">Section Label</p>
+          <p class="mb-6 text-xs font-medium uppercase tracking-label text-gold-400">About</p>
+
+          <p class="slot-label mb-3">About Heading</p>
+          <h2 class="font-display text-3xl font-semibold tracking-tight text-snow sm:text-4xl lg:text-5xl">
+            [Short intro heading]
+          </h2>
+
+          <p class="slot-label mb-3 mt-8">About Body</p>
+          <p class="text-base leading-relaxed text-mist sm:text-lg">
+            [Short intro about the business goes here. Keep this to two or three sentences that explain who you are and why it matters. Replace this paragraph with real copy later.]
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         3. FEATURES / SERVICES
+         Four dark cards with hairline borders and a gold hover glow.
+         ===================================================================== -->
+    <section id="features" class="reveal bg-coal">
+      <div class="mx-auto max-w-6xl px-6 py-24 sm:px-8 sm:py-32">
+        <div class="mx-auto mb-16 max-w-2xl text-center">
+          <p class="slot-label mb-4">Section Label</p>
+          <p class="mb-6 text-xs font-medium uppercase tracking-label text-gold-400">Features / Services</p>
+          <p class="slot-label mb-3">Section Heading</p>
+          <h2 class="font-display text-3xl font-semibold tracking-tight text-snow sm:text-4xl lg:text-5xl">[What you offer]</h2>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+
+          <article class="card-glow rounded-2xl border border-line bg-slate p-7">
+            <p class="slot-label mb-5">Feature Card</p>
+            <div class="mb-6 flex h-11 w-11 items-center justify-center rounded-full border border-gold-400/30 bg-gold-400/10 text-gold-400" aria-hidden="true">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="7" />
+              </svg>
+            </div>
+            <p class="slot-label mb-2">Feature / Service Name</p>
+            <h3 class="text-base font-semibold text-snow">[Feature/Service Name]</h3>
+            <p class="slot-label mb-2 mt-4">Short Description</p>
+            <p class="text-sm leading-relaxed text-mist">[Short description]</p>
+          </article>
+
+          <article class="card-glow rounded-2xl border border-line bg-slate p-7">
+            <p class="slot-label mb-5">Feature Card</p>
+            <div class="mb-6 flex h-11 w-11 items-center justify-center rounded-full border border-gold-400/30 bg-gold-400/10 text-gold-400" aria-hidden="true">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <rect x="6" y="6" width="12" height="12" rx="2" />
+              </svg>
+            </div>
+            <p class="slot-label mb-2">Feature / Service Name</p>
+            <h3 class="text-base font-semibold text-snow">[Feature/Service Name]</h3>
+            <p class="slot-label mb-2 mt-4">Short Description</p>
+            <p class="text-sm leading-relaxed text-mist">[Short description]</p>
+          </article>
+
+          <article class="card-glow rounded-2xl border border-line bg-slate p-7">
+            <p class="slot-label mb-5">Feature Card</p>
+            <div class="mb-6 flex h-11 w-11 items-center justify-center rounded-full border border-gold-400/30 bg-gold-400/10 text-gold-400" aria-hidden="true">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 6v12M6 12h12" stroke-linecap="round" />
+              </svg>
+            </div>
+            <p class="slot-label mb-2">Feature / Service Name</p>
+            <h3 class="text-base font-semibold text-snow">[Feature/Service Name]</h3>
+            <p class="slot-label mb-2 mt-4">Short Description</p>
+            <p class="text-sm leading-relaxed text-mist">[Short description]</p>
+          </article>
+
+          <article class="card-glow rounded-2xl border border-line bg-slate p-7">
+            <p class="slot-label mb-5">Feature Card</p>
+            <div class="mb-6 flex h-11 w-11 items-center justify-center rounded-full border border-gold-400/30 bg-gold-400/10 text-gold-400" aria-hidden="true">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path d="M5 16l7-8 7 8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <p class="slot-label mb-2">Feature / Service Name</p>
+            <h3 class="text-base font-semibold text-snow">[Feature/Service Name]</h3>
+            <p class="slot-label mb-2 mt-4">Short Description</p>
+            <p class="text-sm leading-relaxed text-mist">[Short description]</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         4. GALLERY / SHOWCASE
+         Six empty dark frames. Swap inner markup for <img> later.
+         ===================================================================== -->
+    <section id="gallery" class="reveal">
+      <div class="mx-auto max-w-6xl px-6 py-24 sm:px-8 sm:py-32">
+        <div class="mx-auto mb-16 max-w-2xl text-center">
+          <p class="slot-label mb-4">Section Label</p>
+          <p class="mb-6 text-xs font-medium uppercase tracking-label text-gold-400">Gallery / Showcase</p>
+          <p class="slot-label mb-3">Section Heading</p>
+          <h2 class="font-display text-3xl font-semibold tracking-tight text-snow sm:text-4xl lg:text-5xl">[Visual work or space]</h2>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-5">
+
+          <figure class="ph-box card-glow flex aspect-[4/3] flex-col items-center justify-center rounded-xl">
+            <p class="slot-label mb-2">Image Slot</p>
+            <svg class="mb-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <circle cx="8.5" cy="10" r="1.5" />
+              <path d="M21 16l-5-5-9 9" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <figcaption class="text-xs text-mist/70">[Image]</figcaption>
+          </figure>
+
+          <figure class="ph-box card-glow flex aspect-[4/3] flex-col items-center justify-center rounded-xl">
+            <p class="slot-label mb-2">Image Slot</p>
+            <svg class="mb-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <circle cx="8.5" cy="10" r="1.5" />
+              <path d="M21 16l-5-5-9 9" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <figcaption class="text-xs text-mist/70">[Image]</figcaption>
+          </figure>
+
+          <figure class="ph-box card-glow flex aspect-[4/3] flex-col items-center justify-center rounded-xl">
+            <p class="slot-label mb-2">Image Slot</p>
+            <svg class="mb-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <circle cx="8.5" cy="10" r="1.5" />
+              <path d="M21 16l-5-5-9 9" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <figcaption class="text-xs text-mist/70">[Image]</figcaption>
+          </figure>
+
+          <figure class="ph-box card-glow flex aspect-[4/3] flex-col items-center justify-center rounded-xl">
+            <p class="slot-label mb-2">Image Slot</p>
+            <svg class="mb-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <circle cx="8.5" cy="10" r="1.5" />
+              <path d="M21 16l-5-5-9 9" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <figcaption class="text-xs text-mist/70">[Image]</figcaption>
+          </figure>
+
+          <figure class="ph-box card-glow flex aspect-[4/3] flex-col items-center justify-center rounded-xl">
+            <p class="slot-label mb-2">Image Slot</p>
+            <svg class="mb-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <circle cx="8.5" cy="10" r="1.5" />
+              <path d="M21 16l-5-5-9 9" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <figcaption class="text-xs text-mist/70">[Image]</figcaption>
+          </figure>
+
+          <figure class="ph-box card-glow flex aspect-[4/3] flex-col items-center justify-center rounded-xl">
+            <p class="slot-label mb-2">Image Slot</p>
+            <svg class="mb-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <circle cx="8.5" cy="10" r="1.5" />
+              <path d="M21 16l-5-5-9 9" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <figcaption class="text-xs text-mist/70">[Image]</figcaption>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         5. TESTIMONIAL
+         Single quote, oversized display type, gold marks.
+         ===================================================================== -->
+    <section id="testimonial" class="reveal border-t border-line bg-coal">
+      <div class="mx-auto max-w-6xl px-6 py-24 sm:px-8 sm:py-32">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="slot-label mb-4">Section Label</p>
+          <p class="mb-10 text-xs font-medium uppercase tracking-label text-gold-400">Testimonial</p>
+
+          <blockquote>
+            <p class="slot-label mb-5">Customer Quote</p>
+            <p class="font-display text-2xl font-medium leading-snug text-snow sm:text-3xl lg:text-4xl">
+              “[Customer quote goes here]”
+            </p>
+            <footer class="mt-10">
+              <div class="mx-auto mb-4 h-px w-10 bg-gold-400/60"></div>
+              <p class="slot-label mb-2">Customer Name</p>
+              <cite class="not-italic text-sm text-mist">[Customer Name]</cite>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         6. CALL-TO-ACTION BANNER
+         Gold-bordered panel with a soft inner glow.
+         ===================================================================== -->
+    <section id="cta" class="reveal">
+      <div class="mx-auto max-w-6xl px-6 py-24 sm:px-8 sm:py-32">
+        <div class="relative overflow-hidden rounded-3xl border border-gold-400/35 bg-slate px-8 py-16 text-center shadow-glow sm:px-16 sm:py-20">
+          <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(201,164,74,0.16),_transparent_60%)]"></div>
+          <div class="relative">
+            <p class="slot-label mb-4">Section Label</p>
+            <p class="mb-6 text-xs font-medium uppercase tracking-label text-gold-400">Call to Action</p>
+
+            <p class="slot-label mb-3">Action Heading</p>
+            <h2 class="font-display text-3xl font-semibold tracking-tight text-snow sm:text-4xl lg:text-5xl">
+              [Action heading]
+            </h2>
+
+            <p class="slot-label mb-3 mt-5">Action Supporting Line</p>
+            <p class="mx-auto max-w-md text-base text-mist">
+              [One supporting line that tells the visitor what happens next.]
+            </p>
+
+            <div class="mt-10">
+              <p class="slot-label mb-3">CTA Button</p>
+              <a href="#" class="btn-primary inline-flex items-center justify-center rounded-full bg-gold-400 px-8 py-3.5 text-sm font-semibold text-void hover:bg-gold-300">
+                [Contact/Order/Book Button]
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =====================================================================
+       7. FOOTER
+       ===================================================================== -->
+  <footer class="border-t border-line bg-coal">
+    <div class="mx-auto flex max-w-6xl flex-col items-center gap-10 px-6 py-14 sm:px-8 md:flex-row md:items-start md:justify-between">
+      <div class="text-center md:text-left">
+        <p class="slot-label mb-2">Brand</p>
+        <p class="font-display text-base font-semibold text-snow">[Business Name]</p>
+        <p class="slot-label mb-1 mt-5">Contact Info</p>
+        <p class="text-sm text-mist">[Contact Info]</p>
+      </div>
+
+      <nav class="flex gap-10" aria-label="Footer">
+        <div class="text-center">
+          <p class="slot-label mb-2">Footer Link</p>
+          <a href="#" class="text-sm text-mist hover:text-snow">[Link]</a>
+        </div>
+        <div class="text-center">
+          <p class="slot-label mb-2">Footer Link</p>
+          <a href="#" class="text-sm text-mist hover:text-snow">[Link]</a>
+        </div>
+        <div class="text-center">
+          <p class="slot-label mb-2">Footer Link</p>
+          <a href="#" class="text-sm text-mist hover:text-snow">[Link]</a>
+        </div>
+      </nav>
+    </div>
+    <div class="border-t border-line">
+      <p class="mx-auto max-w-6xl px-6 py-5 text-center text-xs text-mist/70 sm:px-8 md:text-left">
+        © [Year] [Business Name]
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var header = document.getElementById("site-header");
+      var onScroll = function () {
+        if (window.scrollY > 12) header.classList.add("is-scrolled");
+        else header.classList.remove("is-scrolled");
+      };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      var nodes = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window)) {
+        nodes.forEach(function (el) { el.classList.add("is-visible"); });
+        return;
+      }
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      );
+      nodes.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+</body>
+</html>
